@@ -67,7 +67,7 @@ public:
 
     bool canBuy(Chicken *chicken, bool gender);
 
-    void checkHunger(IAnimal *animal, int daysSinceHunger);
+    void checkEagleEggs(Time *date);
 
     // show functions :
     void showZoo(Time *date);

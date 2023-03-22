@@ -30,19 +30,21 @@ public:
     void setMonth(int month);
 
     void setDay(int day);
+
     int getYear();
 
     int getMonth();
 
     int getDay();
 
-    int totalMonthsFromStartOfYear() const ;
+    int totalMonthsFromStartOfYear() const;
 
     int monthsBetweenDates(const Time &dateToCompare);
 
+    int daysBetweenDates(const Time &dateToCompare);
+
 
 };
-
 
 
 #endif //ZOOREWORK_TIME_H

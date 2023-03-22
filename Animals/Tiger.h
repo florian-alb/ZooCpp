@@ -37,7 +37,7 @@ public:
 
     void gestation(Time *date, House &house) override;
 
-    string askName(bool gender);
+    string askName(bool gender) override;
 
     void beSick() override;
 

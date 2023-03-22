@@ -55,3 +55,9 @@ int Time::monthsBetweenDates(const Time &dateToCompare) {
     int months2 = dateToCompare.totalMonthsFromStartOfYear() + dateToCompare.m_month;
     return months2 - months1;
 }
+
+int Time::daysBetweenDates(const Time &dateToCompare) {
+    int day1 = this->m_year * 360 + this->m_month*30 + this->m_day;
+    int day2 = dateToCompare.m_year * 360 + dateToCompare.m_month*30 + dateToCompare.m_day;
+    return day2 - day1;
+}

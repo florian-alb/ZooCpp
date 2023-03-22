@@ -123,4 +123,17 @@ void Chicken::setPartner(IAnimal *eagle) {
     // nothing here
 }
 
+string Chicken::askName(bool gender) {
+    string tGender;
+    string chickenName;
+    if (gender) {
+        tGender = "male";
+    } else {
+        tGender = "female";
+    }
+    cout << "A new chicken is born! It's a " << tGender << " what shall we call it? " << endl;
+    cin >> chickenName;
+    return chickenName;
+}
+
 Chicken::~Chicken() = default;

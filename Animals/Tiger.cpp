@@ -120,7 +120,6 @@ string Tiger::askName(bool gender) {
 }
 
 // feed
-
 int Tiger::daysBeforeHunger() {
     return 2;
 }

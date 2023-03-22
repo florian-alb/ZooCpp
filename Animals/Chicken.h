@@ -44,6 +44,8 @@ public:
 
     void setPartner(IAnimal *eagle) override;
 
+    string askName(bool gender) override;
+
     ~Chicken() override;
 
 };

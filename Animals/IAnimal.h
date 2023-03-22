@@ -61,6 +61,10 @@ public:
 
     bool getHungry();
 
+    virtual string askName(bool gender)=0;
+
+    void setNAme(string name);
+
     string getName();
 
     void setPregnant(bool status);

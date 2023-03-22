@@ -149,6 +149,16 @@ void House::checkSick() {
     }
 }
 
+void House::addNewEagle(Time *date) {
+    srand(time(nullptr));
+    int randomNum = rand() % 2;
+    bool gender = (randomNum == 1);
+    Eagle *eagle = new Eagle("", gender);
+    eagle->setNAme(eagle->askName(gender));
+    eagle->setBirthDate(0, date->getYear(), date->getMonth(), date->getDay());
+    addAnimal(eagle);
+}
+
 House::~House() {
     cout << "Goodbye " << getType() << " house" << getSellPrice() << endl;
 }

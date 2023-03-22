@@ -144,6 +144,19 @@ void Eagle::setPartner(IAnimal* eagle) {
     }
 }
 
+string Eagle::askName(bool gender) {
+    string tGender;
+    string eagleName;
+    if (gender) {
+        tGender = "male";
+    } else {
+        tGender = "female";
+    }
+    cout << "A new eagle is born! It's a " << tGender << " what shall we call it? " << endl;
+    cin >> eagleName;
+    return eagleName;
+}
+
 //void Eagle::removeAnimal() {
 //    EagleHouse::getInstance()->removeAnimal(this);
 //}

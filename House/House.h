@@ -62,7 +62,10 @@ public:
 
     void checkSick();
 
+    void addNewEagle(Time *date);
+
     void fire();
+
     void animalTheft();
 
     ~House();

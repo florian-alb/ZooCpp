@@ -55,6 +55,10 @@ bool IAnimal::getHungry() {
     return m_hungry;
 }
 
+void IAnimal::setNAme(string name) {
+    m_name = name;
+}
+
 string IAnimal::getName() {
     return m_name;
 }

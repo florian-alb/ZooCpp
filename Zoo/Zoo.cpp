@@ -54,16 +54,16 @@ void Zoo::setPartner(Time *date) {
             }
         }
     }
-    for (auto *eagle : eagles){
+    for (auto *eagle: eagles) {
         IAnimal *femaleEagle = nullptr;
         IAnimal *maleEagle = nullptr;
-        if (eagle->getPartner() == nullptr && eagle->getAge(*date).getYear()>=4){
-            if (eagle->getGender()){
+        if (eagle->getPartner() == nullptr && eagle->getAge(*date).getYear() >= 4) {
+            if (eagle->getGender()) {
                 maleEagle = eagle;
             } else {
                 femaleEagle = eagle;
             }
-            if (femaleEagle != nullptr && maleEagle != nullptr){
+            if (femaleEagle != nullptr && maleEagle != nullptr) {
                 maleEagle->setPartner(femaleEagle);
                 femaleEagle->setPartner(maleEagle);
                 femaleEagle = nullptr;
@@ -238,9 +238,16 @@ void Zoo::addHouse(House *house) {
     zooHouses.push_back(house);
 }
 
-void Zoo::checkHunger(IAnimal *animal, int daysSinceHunger) {
-    if (daysSinceHunger >= animal->daysBeforeHunger()) {
-        animal->setHunger(true);
+void Zoo::checkEagleEggs(Time *date) {
+    for (auto *egg: eagleNursery) {
+        if (egg->getEggDate().daysBetweenDates(*date) >= egg->getCovertime()) {
+            for (auto *house : zooHouses){
+                if (house->getType()=="Eagle"){
+                    house->addNewEagle(date);
+                    //house->addNewEagle(date); perte de 1 des 2 oeufs
+                }
+            }
+        }
     }
 }
 
@@ -320,16 +327,16 @@ void Zoo::breedTigers(Time *date) {
 }
 
 void Zoo::eagleEggs(Time *date) {
-    vector<IAnimal* >eagles;
-    for (auto *house : zooHouses){
-        if (house->getType()=="Eagle"){
-            for (auto *eagle : house->getHouse()){
+    vector<IAnimal *> eagles;
+    for (auto *house: zooHouses) {
+        if (house->getType() == "Eagle") {
+            for (auto *eagle: house->getHouse()) {
                 eagles.push_back(eagle);
             }
         }
     }
-    for (auto *eagle : eagles){
-        if (!eagle->getGender() && eagle->getPartner()!= nullptr){
+    for (auto *eagle: eagles) {
+        if (!eagle->getGender() && eagle->getPartner() != nullptr) {
             eagleNursery.push_back(new EagleEgg(*date));
             eagleNursery.push_back(new EagleEgg(*date));
         }
@@ -462,6 +469,7 @@ void Zoo::dailyActions(Time *date) {
     getVisits(date);
     chikenEggSpawing(date);
     checkSick();
+    checkEagleEggs(date);
 }
 
 void Zoo::montlyActions(Time *date) {
@@ -475,6 +483,10 @@ void Zoo::montlyActions(Time *date) {
     animalTheft();
     pest();
     rottenFlesh();
+    // Eagles egg
+    if (date->getMonth() == 5) {
+        eagleEggs(date);
+    }
 
 
     for (int i = 0; i < 30; i++) {

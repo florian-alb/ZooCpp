@@ -41,7 +41,7 @@ public:
 
     void setPartner(IAnimal *eagle) override;
 
-    //virtual void removeAnimal();
+    string askName(bool gender) override;
 
     ~Eagle() override;
 
