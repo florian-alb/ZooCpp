@@ -9,7 +9,7 @@
 
 using namespace std;
 
-Eagle::Eagle(string name, bool gender) : IAnimal(name, gender) {};
+Eagle::Eagle(string name, bool gender) : IAnimal(name, gender) {}
 
 int Eagle::getPrice(int age) {
     switch (age) {
@@ -131,6 +131,16 @@ void Eagle::beSick() {
         int duration = 15*probability->getUncertainty(0.8, 1.2);
         setDaysBeforeHealing(duration);
         cout << getName() << " is sick for " << duration << " days!" << endl;
+    }
+}
+
+IAnimal* Eagle::getPartner() {
+    return partner;
+}
+
+void Eagle::setPartner(IAnimal* eagle) {
+    if (partner == nullptr){
+        partner = eagle;
     }
 }
 

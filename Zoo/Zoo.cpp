@@ -45,6 +45,35 @@ void Zoo::setSeeds(float quantity) {
     m_seeds += quantity;
 }
 
+void Zoo::setPartner(Time *date) {
+    vector<IAnimal *> eagles;
+    for (auto *house: zooHouses) {
+        if (house->getType() == "Eagle") {
+            for (auto *animal: house->getHouse()) {
+                eagles.push_back(animal);
+            }
+        }
+    }
+    for (auto *eagle : eagles){
+        IAnimal *femaleEagle = nullptr;
+        IAnimal *maleEagle = nullptr;
+        if (eagle->getPartner() == nullptr && eagle->getAge(*date).getYear()>=4){
+            if (eagle->getGender()){
+                maleEagle = eagle;
+            } else {
+                femaleEagle = eagle;
+            }
+            if (femaleEagle != nullptr && maleEagle != nullptr){
+                maleEagle->setPartner(femaleEagle);
+                femaleEagle->setPartner(maleEagle);
+                femaleEagle = nullptr;
+                maleEagle = nullptr;
+            }
+        }
+    }
+}
+
+
 // buy functions:
 void Zoo::buyFood(Food *food, int quantity) {
     m_money -= quantity * food->getPrice();
@@ -290,13 +319,29 @@ void Zoo::breedTigers(Time *date) {
     }
 }
 
+void Zoo::eagleEggs(Time *date) {
+    vector<IAnimal* >eagles;
+    for (auto *house : zooHouses){
+        if (house->getType()=="Eagle"){
+            for (auto *eagle : house->getHouse()){
+                eagles.push_back(eagle);
+            }
+        }
+    }
+    for (auto *eagle : eagles){
+        if (!eagle->getGender() && eagle->getPartner()!= nullptr){
+            eagleNursery.push_back(new EagleEgg(*date));
+            eagleNursery.push_back(new EagleEgg(*date));
+        }
+    }
+}
 
 void Zoo::getVisits(Time *date) {
     auto *random = new Random();
 
     int tigerNbr = 0;
     int eagleNbr = 0;
-    int chickenNbr = 0 ;
+    int chickenNbr = 0;
     int totalVisitors;
 
     double uncertainty = random->getUncertainty(0.8, 1.2);
@@ -304,7 +349,7 @@ void Zoo::getVisits(Time *date) {
     cout << uncertainty << endl;
 
     for (House *house: zooHouses) {
-        if (house->getType()=="Tiger") {
+        if (house->getType() == "Tiger") {
             tigerNbr += house->getShowableAnimalsNbr();
         } else if (house->getType() == "Eagle") {
             eagleNbr += house->getShowableAnimalsNbr();
@@ -321,7 +366,7 @@ void Zoo::getVisits(Time *date) {
 
     cout << "Visitors today :" << totalVisitors << endl;
 
-    m_money += (17 + 13)/4 * totalVisitors;
+    m_money += (17 + 13) / 4 * totalVisitors;
 
     delete random;
 }
@@ -356,10 +401,10 @@ void Zoo::addGrant() {
     m_money += tigerGrant + eagleGrant;
 }
 
-void Zoo::fire(){
+void Zoo::fire() {
     // set probability of 1%
     auto *probability = new Random();
-    if (probability->probability(1)){
+    if (probability->probability(1)) {
         // get a random house to burn it
         int randomHouse = probability->randomInt(zooHouses.size());
         zooHouses[randomHouse]->fire();
@@ -372,7 +417,7 @@ void Zoo::fire(){
 void Zoo::animalTheft() {
     // set probability of 1%
     auto *probability = new Random();
-    if (probability->probability(1)){
+    if (probability->probability(1)) {
         // get a random house
         int randomHouse = probability->randomInt(zooHouses.size());
         zooHouses[randomHouse]->animalTheft();
@@ -383,9 +428,9 @@ void Zoo::animalTheft() {
 void Zoo::pest() {
     // set probability of 20%
     auto *probability = new Random();
-    if (probability->probability(20)){
-        cout << (getSeeds()*0.1) << "kg of seeds has been destructed..." << endl;
-        setSeeds(-(getSeeds()*0.1));
+    if (probability->probability(20)) {
+        cout << (getSeeds() * 0.1) << "kg of seeds has been destructed..." << endl;
+        setSeeds(-(getSeeds() * 0.1));
     }
     delete probability;
 }
@@ -393,21 +438,21 @@ void Zoo::pest() {
 void Zoo::rottenFlesh() {
     // set probability of 10%
     auto *probability = new Random();
-    if (probability->probability(10)){
-        cout << (getMeat()*0.2) << "kg of meat has been destructed..." << endl;
-        setMeat(-(getMeat()*0.2));
+    if (probability->probability(10)) {
+        cout << (getMeat() * 0.2) << "kg of meat has been destructed..." << endl;
+        setMeat(-(getMeat() * 0.2));
     }
     delete probability;
 }
 
 void Zoo::beSick() {
-    for (auto *house : zooHouses){
+    for (auto *house: zooHouses) {
         house->beSick();
     }
 }
 
 void Zoo::checkSick() {
-    for (auto *house : zooHouses){
+    for (auto *house: zooHouses) {
         house->checkSick();
     }
 }
@@ -424,6 +469,7 @@ void Zoo::montlyActions(Time *date) {
     checkTigerGestation(date);
     checkAnimalAges(date);
     beSick();
+    setPartner(date);
     // specials events
     fire();
     animalTheft();

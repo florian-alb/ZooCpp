@@ -115,8 +115,12 @@ void Chicken::beSick() {
     }
 }
 
-//void Chicken::removeAnimal() {
-//    ChickenHouse::getInstance()->removeAnimal(this);
-//}
+IAnimal* Chicken::getPartner(){
+    return nullptr;
+}
+
+void Chicken::setPartner(IAnimal *eagle) {
+    // nothing here
+}
 
 Chicken::~Chicken() = default;

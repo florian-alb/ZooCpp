@@ -12,7 +12,7 @@
 using namespace std;
 
 class Eagle : public IAnimal {
-
+    IAnimal* partner = nullptr;
 
 public:
     Eagle(string name, bool gender);
@@ -36,6 +36,10 @@ public:
     void gestation(Time *date, House &house) override;
 
     void beSick() override;
+
+    IAnimal* getPartner() override;
+
+    void setPartner(IAnimal *eagle) override;
 
     //virtual void removeAnimal();
 

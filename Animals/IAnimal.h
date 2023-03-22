@@ -71,7 +71,9 @@ public:
 
     virtual void gestation(Time *time, House &house) = 0;
 
-    //virtual void removeAnimal()=0;
+    virtual IAnimal* getPartner()=0;
+
+    virtual void setPartner(IAnimal *eagle)=0;
 
     virtual ~IAnimal();
 };

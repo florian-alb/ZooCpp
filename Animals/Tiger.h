@@ -6,7 +6,6 @@
 #define ZOOREWORK_TIGER_H
 
 
-
 #include <iostream>
 #include "IAnimal.h"
 #include "../Time/Time.h"
@@ -23,7 +22,9 @@ public:
     void setBirthDate(int age, int year, int month, int day);
 
     int getPrice(int age) override;
+
     int getSellPrice(Time date) override;
+
     int daysBeforeHunger() override;
 
     void checkHunger(int daysSinceHunger);
@@ -40,14 +41,13 @@ public:
 
     void beSick() override;
 
-    //virtual void removeAnimal();
+    IAnimal *getPartner() override;
+
+    void setPartner(IAnimal *eagle) override;
 
     ~Tiger() override;
 
 };
-
-
-
 
 
 #endif //ZOOREWORK_TIGER_H

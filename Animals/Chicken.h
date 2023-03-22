@@ -40,7 +40,10 @@ public:
 
     void beSick() override;
 
-    //virtual void removeAnimal();
+    IAnimal* getPartner() override;
+
+    void setPartner(IAnimal *eagle) override;
+
     ~Chicken() override;
 
 };

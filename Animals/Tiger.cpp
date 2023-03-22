@@ -177,6 +177,14 @@ void Tiger::beSick() {
     }
 }
 
+IAnimal* Tiger::getPartner(){
+    return nullptr;
+}
+
+void Tiger::setPartner(IAnimal *eagle) {
+    // nothing here
+}
+
 //void Tiger::removeAnimal() {
 //    TigerHouse::getInstance()->removeAnimal(this);
 //}

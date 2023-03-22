@@ -11,6 +11,8 @@
 #include "../House/House.h"
 #include "../Food/Food.h"
 #include "../Time/Time.h"
+#include "../Egg/EagleEgg.h"
+#include "../Egg/ChickenEgg.h"
 
 class Tiger;
 
@@ -21,6 +23,9 @@ class Zoo {
     float m_meat;
 
     vector<House *> zooHouses;
+
+    vector<Egg *> eagleNursery;
+    vector<Egg *> chickenNursery;
 
 public:
     Zoo(string name, int money);
@@ -41,6 +46,8 @@ public:
     void setMeat(float quantity);
 
     void setSeeds(float quantity);
+
+    void setPartner(Time *date);
 
     // buy functions:
     void buyFood(Food *food, int quantity);
@@ -90,6 +97,8 @@ public:
     bool isMaleReady();
 
     void breedTigers(Time *date);
+
+    void eagleEggs(Time *date);
 
     void checkTigerGestation(Time *date);
 
