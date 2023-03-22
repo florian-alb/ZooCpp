@@ -94,8 +94,6 @@ public:
 
     void chikenEggSpawing(Time *date);
 
-    bool isMaleReady();
-
     void breedTigers(Time *date);
 
     void eagleEggs(Time *date);

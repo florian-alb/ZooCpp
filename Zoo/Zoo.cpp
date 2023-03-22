@@ -266,15 +266,6 @@ void Zoo::chikenEggSpawing(Time *date) {
 //    }
 }
 
-bool Zoo::isMaleReady() {
-//    for (int i = 0; i < size(chickenZoo); i++) {
-//        if (chickenZoo[i]->getGender() && !chickenZoo[i]->getSick() && !chickenZoo[i]->getHungry()) {
-//            return true;
-//        }
-//    }
-//    return false;
-}
-
 void Zoo::breedTigers(Time *date) {
     vector<IAnimal *> tigers;
 
