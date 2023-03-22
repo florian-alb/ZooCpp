@@ -108,3 +108,5 @@ int main(){
         }
     }
 }
+
+// TODO : eggs, eagle, house space management, eagle fidelity
